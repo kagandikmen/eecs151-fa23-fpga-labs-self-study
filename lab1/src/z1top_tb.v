@@ -1,15 +1,21 @@
+// Author:      Kagan Dikmen
+// Created:     2023-12-28
+// Modified:    2023-12-28
+// Status:      works fine
+
 // This is a testbench for the z1top module
+// (I am yet to acquire an FPGA board, so I had to test my answer in Vivado)
 
 module z1top_tb();
 
-reg CLK_125MHZ_FPGA,
-[3:0] BUTTONS,
-[1:0] SWITCHES,
-[5:0] LEDS;
+reg CLK_125MHZ_FPGA;
+reg [3:0] BUTTONS;
+reg [1:0] SWITCHES;
+wire [5:0] LEDS;
 
 z1top dut(.CLK_125MHZ_FPGA(CLK_125MHZ_FPGA), 
             .BUTTONS(BUTTONS), 
-            .SWITCHES(SWITCHES), 
+            .SWITCHES(SWITCHES),
             .LEDS(LEDS) );
 
 initial begin
@@ -20,4 +26,3 @@ initial begin
 end
 
 endmodule
-
