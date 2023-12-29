@@ -6,6 +6,8 @@
 // This is a testbench for the z1top module
 // (I am yet to acquire an FPGA board, so I had to test my answer in Vivado)
 
+`timescale 1ns/1ns
+
 module z1top_tb();
 
 reg CLK_125MHZ_FPGA;
