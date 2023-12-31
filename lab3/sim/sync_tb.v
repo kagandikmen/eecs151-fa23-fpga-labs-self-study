@@ -1,3 +1,10 @@
+// Modified:    2023-12-31
+// Status:      works fine
+
+// made modifications to make it work on my own machine
+
+`include "../src/synchronizer.v"
+
 `timescale 1ns/1ns
 `define CLK_PERIOD 8
 
@@ -20,13 +27,13 @@ module sync_tb();
     );
 
     initial begin
-        `ifdef IVERILOG
-            $dumpfile("sync_tb.fst");
+        // `ifdef IVERILOG
+            $dumpfile("sync_tb.vcd");
             $dumpvars(0, sync_tb);
-        `endif
-        `ifndef IVERILOG
-            $vcdpluson;
-        `endif
+        // `endif
+        // `ifndef IVERILOG
+        //     $vcdpluson;
+        // `endif
 
         // We use fork-join to create 2 threads that operate in parallel
         fork
@@ -57,9 +64,9 @@ module sync_tb();
 
         $display("Test finished");
 
-        `ifndef IVERILOG
-            $vcdplusoff;
-        `endif
+        // `ifndef IVERILOG
+        //     $vcdplusoff;
+        // `endif
         $finish();
     end
 endmodule

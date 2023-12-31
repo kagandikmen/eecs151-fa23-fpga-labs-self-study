@@ -1,3 +1,10 @@
+// Modified:    2023-12-31
+// Status:      works fine
+
+// made modifications to make it work on my own machine
+
+`include "../src/edge_detector.v"
+
 `timescale 1ns/1ns
 
 `define CLK_PERIOD 8
@@ -24,13 +31,13 @@ module edge_detector_tb();
     reg [31:0] tests_failed = 0;
 
     initial begin
-        `ifdef IVERILOG
-            $dumpfile("edge_detector_tb.fst");
+        // `ifdef IVERILOG
+            $dumpfile("edge_detector_tb.vcd");
             $dumpvars(0, edge_detector_tb);
-        `endif
-        `ifndef IVERILOG
-            $vcdpluson;
-        `endif
+        // `endif
+        // `ifndef IVERILOG
+        //     $vcdpluson;
+        // `endif
 
         fork
             // Stimulus thread
@@ -78,9 +85,9 @@ module edge_detector_tb();
             end
         join
 
-        `ifndef IVERILOG
-            $vcdplusoff;
-        `endif
+        // `ifndef IVERILOG
+        //     $vcdplusoff;
+        // `endif
         $finish();
     end
 

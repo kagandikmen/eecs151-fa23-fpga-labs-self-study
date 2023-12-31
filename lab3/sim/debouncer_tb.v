@@ -1,3 +1,10 @@
+// Modified:    2023-12-31
+// Status:      works fine
+
+// made modifications to make it work on my own machine
+
+`include "../src/debouncer.v"
+
 `timescale 1ns/1ns
 
 `define CLK_PERIOD 8
@@ -29,17 +36,17 @@ module debouncer_tb();
     reg test0_done = 0;
     integer z;
     initial begin
-        `ifdef IVERILOG
-            $dumpfile("debouncer_tb.fst");
+        // `ifdef IVERILOG
+            $dumpfile("debouncer_tb.vcd");
             $dumpvars(0, debouncer_tb);
             for(z = 0; z < `DEBOUNCER_WIDTH; z = z + 1) begin
                 $dumpvars(0, DUT.saturating_counter[z]);
             end
-        `endif
-        `ifndef IVERILOG
-            $vcdpluson;
-            $vcdplusmemon;
-        `endif
+        // `endif
+        // `ifndef IVERILOG
+        //     $vcdpluson;
+        //     $vcdplusmemon;
+        // `endif
 
         glitchy_signal = 0;
         repeat (5) @(posedge clk);
@@ -68,7 +75,8 @@ module debouncer_tb();
         glitchy_signal[0] = 0;
         repeat (`SAMPLE_CNT_MAX * (`PULSE_CNT_MAX + 1)) @(posedge clk);
         #1;
-        assert(debounced_signal[0] == 0) else $display("1st debounced_signal didn't stay low");
+        // assert(debounced_signal[0] == 0) else $display("1st debounced_signal didn't stay low");
+        if(debounced_signal[0] != 0) $display("1st debounced_signal didn't stay low");
 
         test0_done = 1;
 
@@ -116,9 +124,9 @@ module debouncer_tb();
         repeat (10) @(posedge clk);
 
         $display("Done!");
-        `ifndef IVERILOG
-            $vcdplusoff;
-        `endif
+        // `ifndef IVERILOG
+        //     $vcdplusoff;
+        // `endif
         $finish();
     end
 
