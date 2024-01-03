@@ -1,4 +1,11 @@
+// Modified:    2024-01-03
+// Status:      unknown
+
 // This module instantiates the synchronizer -> debouncer -> edge detector signal chain for button inputs
+
+`include "../src/debouncer.v"
+`include "../src/edge_detector.v"
+
 module button_parser #(
     parameter WIDTH = 1,
     parameter SAMPLE_CNT_MAX = 62500,

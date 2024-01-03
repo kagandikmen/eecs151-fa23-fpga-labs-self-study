@@ -1,4 +1,13 @@
+// Modified:    2024-01-03
+// Status:      unknown
+
 `define CLOCK_FREQ 125_000_000
+
+`include "../src/button_parser.v"
+`include "../src/dac.v"
+`include "../src/debouncer.v"
+`include "../src/edge_detector.v"
+`include "../src/sq_wave_gen.v"
 
 module z1top (
     input CLK_125MHZ_FPGA,

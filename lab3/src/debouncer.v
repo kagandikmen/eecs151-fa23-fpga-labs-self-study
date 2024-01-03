@@ -1,4 +1,4 @@
-// Modified:    2023-12-31
+// Modified:    2024-01-03
 // Status:      works fine
 
 `include "../src/synchronizer.v"
@@ -26,10 +26,6 @@ module debouncer #(
     reg spg_out = 1'b0;                             // output of sample pulse generator
 
     wire [WIDTH-1:0] synch_out_signal;        // glitchy but synchronized
-
-    reg [SAT_CNT_WIDTH:0] sc_max_counter = 'b0;     // counts up to PULSE_CNT_MAX
-    reg [WIDTH-1:0] sc_enable = 'b0;                           // saturating counter enable
-    reg [WIDTH-1:0] sc_reset = 'b0;                            // saturating counter reset
 
     reg [SAT_CNT_WIDTH-1:0] saturating_counter [WIDTH-1:0];
 
