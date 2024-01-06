@@ -1,6 +1,8 @@
 `timescale 1ns/1ns
 `define CLK_PERIOD 8
 
+`include "../src/sq_wave_gen.v"
+
 module sq_wave_gen_tb();
     // Generate 125 Mhz clock
     reg clk = 0;
@@ -18,14 +20,15 @@ module sq_wave_gen_tb();
 
     integer code_file;
     integer next_sample_fetch;
+    integer k = 16;
     initial begin
-        `ifdef IVERILOG
-            $dumpfile("sq_wave_gen_tb.fst");
+        // `ifdef IVERILOG
+            $dumpfile("sq_wave_gen_tb.vcd");
             $dumpvars(0, sq_wave_gen_tb);
-        `endif
-        `ifndef IVERILOG
-            $vcdpluson;
-        `endif
+        // `endif
+        // `ifndef IVERILOG
+        //     $vcdpluson;
+        // `endif
 
         code_file = $fopen("codes.txt", "w");
 
@@ -34,7 +37,7 @@ module sq_wave_gen_tb();
 
         repeat (122000) begin
             // Pull next_sample every X cycles where X is a random number in [2, 9]
-            next_sample_fetch = ($urandom() % 8) + 2;
+            next_sample_fetch = ($urandom(k) % 8) + 2;
             repeat (next_sample_fetch) @(posedge clk);
             #1;
             next_sample = 1;
@@ -45,9 +48,9 @@ module sq_wave_gen_tb();
         end
         $fclose(code_file);
 
-        `ifndef IVERILOG
-            $vcdplusoff;
-        `endif
+        // `ifndef IVERILOG
+        //     $vcdplusoff;
+        // `endif
         $finish();
     end
 endmodule
