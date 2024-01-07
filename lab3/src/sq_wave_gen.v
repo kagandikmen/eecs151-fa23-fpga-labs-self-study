@@ -1,4 +1,8 @@
-`define PERIOD 284091
+// Author:      Kagan Dikmen
+// Modified:    2024-01-07
+// Status:      works fine
+
+`define PERIOD 139*1024*2
 `include "../src/dac.v"
 
 module sq_wave_gen (
@@ -13,7 +17,7 @@ module sq_wave_gen (
                 .pwm());
 
 
-    reg [49:0] ctr = 'b0;
+    reg [26:0] ctr = 'b0;
     reg [9:0] code_buffer = 'b0;
 
 

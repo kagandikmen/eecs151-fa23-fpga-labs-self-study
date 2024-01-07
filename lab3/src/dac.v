@@ -1,3 +1,7 @@
+// Author:      Kagan Dikmen
+// Modified:    2024-01-06
+// Status:      works fine
+
 module dac #(
     parameter CYCLES_PER_WINDOW = 1024,
     parameter CODE_WIDTH = $clog2(CYCLES_PER_WINDOW)
