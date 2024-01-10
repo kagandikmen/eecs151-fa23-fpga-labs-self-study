@@ -118,19 +118,19 @@ module fifo_tb();
 
   integer z;
   initial begin: TB
-    `ifndef IVERILOG
-        $vcdpluson;
-        $vcdplusmemon;
-    `endif
-    `ifdef IVERILOG
-        $dumpfile("fifo_tb.fst");
-        $dumpvars(0, fifo_tb);
-        for(z = 0; z < DEPTH; z = z + 1) begin
-            // TODO: replace this line with a path to the 2D reg in your FIFO
-            // to show each entry in the waveform
-            // $dumpvars(0, dut.memory[z]);
-        end
-    `endif
+    // `ifndef IVERILOG
+    //     $vcdpluson;
+    //     $vcdplusmemon;
+    // `endif
+    // `ifdef IVERILOG
+    //     $dumpfile("fifo_tb.vcd");
+    //     $dumpvars(0, fifo_tb);
+    //     for(z = 0; z < DEPTH; z = z + 1) begin
+    //         // TODO: replace this line with a path to the 2D reg in your FIFO
+    //         // to show each entry in the waveform
+    //         // $dumpvars(0, dut.memory[z]);
+    //     end
+    // `endif
 
     $display("This testbench was run with these params:");
     $display("CLK_PERIOD = %d, WIDTH = %d, DEPTH = %d", `CLK_PERIOD, WIDTH, DEPTH);
@@ -325,7 +325,7 @@ module fifo_tb();
       $fatal();
 
     $display("All the hard tests passed!");
-    $finish();
+    // $finish();
   end
 
 endmodule
