@@ -1,3 +1,5 @@
+// Modified:    2024-01-10
+
 `timescale 1ns/1ps
 
 // UART_Transmitter is essentially a reverse of UART_Receiver
@@ -110,13 +112,13 @@ module uart_transmitter_tb();
 
   initial begin
     #0;
-    `ifdef IVERILOG
-        $dumpfile("uart_transmitter_tb.fst");
+    // `ifdef IVERILOG
+        $dumpfile("uart_transmitter_tb.vcd");
         $dumpvars(0, uart_transmitter_tb);
-    `endif
-    `ifndef IVERILOG
-        $vcdpluson;
-    `endif
+    // `endif
+    // `ifndef IVERILOG
+    //     $vcdpluson;
+    // `endif
 
     rst = 1'b1;
     cnt = 0;

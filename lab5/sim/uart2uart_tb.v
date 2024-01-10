@@ -1,3 +1,5 @@
+// Modified:    2024-01-10
+
 `timescale 1ns/1ps
 
 `define CLOCK_PERIOD 8
@@ -62,13 +64,13 @@ module uart2uart_tb();
 
     reg done = 0;
     initial begin
-        `ifdef IVERILOG
-            $dumpfile("uart2uart_tb.fst");
+        // `ifdef IVERILOG
+            $dumpfile("uart2uart_tb.vcd");
             $dumpvars(0, uart2uart_tb);
-        `endif
-        `ifndef IVERILOG
-            $vcdpluson;
-        `endif
+        // `endif
+        // `ifndef IVERILOG
+        //     $vcdpluson;
+        // `endif
         reset = 1'b0;
         data_in = 8'd0;
         data_in_valid = 1'b0;
@@ -87,6 +89,16 @@ module uart2uart_tb();
 
                 // Send a character to the off chip UART's transmitter to transmit over the serial line
                 data_in = 8'h21;
+                // data_in = 8'hff;
+                // data_in = 8'hfb;
+                // data_in = 8'b10000000;           // - 00000000
+                // data_in = 8'b01000000;           // - 00000000
+                // data_in = 8'b00100000;           // - 00000000
+                // data_in = 8'b00010000;           // - 00000000
+                // data_in = 8'b00001000;           // - 10000000
+                // data_in = 8'b00000100;           // - 01100000
+                // data_in = 8'b00000010;           // - 00011000
+                // data_in = 8'b00000001;           // - 00000110
                 data_in_valid = 1'b1;
                 @(posedge clk); #1;
                 data_in_valid = 1'b0;
@@ -133,9 +145,9 @@ module uart2uart_tb();
 
         repeat (20) @(posedge clk);
         $display("Test finished");
-        `ifndef IVERILOG
-            $vcdplusoff;
-        `endif
+        // `ifndef IVERILOG
+        //     $vcdplusoff;
+        // `endif
         $finish();
     end
 endmodule
