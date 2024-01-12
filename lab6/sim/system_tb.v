@@ -97,7 +97,7 @@ module system_tb();
         end
         #1;
         off_chip_data_out_ready = 1'b0;   
-        assert(off_chip_data_out == data) $display("PASSED! Expected : %d Actual %d", data, off_chip_data_out); else begin
+        if(off_chip_data_out == data) $display("PASSED! Expected : %d Actual %d", data, off_chip_data_out); else begin
           $error("FAILED! Expected : %d Actual %d, TX_FIFO_out is %d", data, off_chip_data_out, top.data_in);
           tests_failed += 1;
         end
@@ -151,12 +151,12 @@ module system_tb();
   integer z;
   initial begin
 
-    `ifndef IVERILOG
-        $vcdpluson;
-	      $vcdplusmemon;
-    `endif
-    `ifdef IVERILOG
-        $dumpfile("system_tb.fst");
+    // `ifndef IVERILOG
+    //     $vcdpluson;
+	  //     $vcdplusmemon;
+    // `endif
+    // `ifdef IVERILOG
+        $dumpfile("system_tb.vcd");
         $dumpvars(0, system_tb);
         for(z = 0; z < MEM_DEPTH; z = z + 1) begin
             // to show each entry of the 2D reg in your mem on the waveform
@@ -168,7 +168,7 @@ module system_tb();
             // $dumpvars(0, top.rx_fifo.data[z]);
             // $dumpvars(0, top.tx_fifo.data[z]);
         end
-    `endif
+    // `endif
     off_chip_data_in = 8'd0;
     off_chip_data_in_valid = 1'b0;
     off_chip_data_out_ready = 1'b1;
@@ -212,10 +212,10 @@ module system_tb();
     else
         $display("\n%d tests FAILED.\n", tests_failed);
 
-    `ifndef IVERILOG
-        $vcdplusoff;
-        $vcdplusmemoff;
-    `endif
+    // `ifndef IVERILOG
+    //     $vcdplusoff;
+    //     $vcdplusmemoff;
+    // `endif
     $finish();
 
   end

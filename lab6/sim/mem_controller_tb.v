@@ -248,11 +248,11 @@ module mem_controller_tb();
     integer i, z;
     initial begin: TB
 
-        `ifndef IVERILOG
-            $vcdpluson;
-            $vcdplusmemon;
-        `endif
-        `ifdef IVERILOG
+        // `ifndef IVERILOG
+        //     $vcdpluson;
+        //     $vcdplusmemon;
+        // `endif
+        // `ifdef IVERILOG
             $dumpfile("mem_controller_tb.fst");
             $dumpvars(0, mem_controller_tb);
             for(z = 0; z < MEM_DEPTH; z = z + 1) begin
@@ -265,7 +265,7 @@ module mem_controller_tb();
                 // $dumpvars(0, rx_fifo.data[z]);
                 // $dumpvars(0, tx_fifo.data[z]);
             end
-        `endif
+        // `endif
 
         /* Initialize write sequence */
         for (i = 0; i < NUM_WRITES; i += 1) begin
@@ -385,10 +385,10 @@ module mem_controller_tb();
         repeat (50) @(posedge clk);
 
 
-        `ifndef IVERILOG
-            $vcdplusoff;
-            $vcdplusmemoff;
-        `endif
+        // `ifndef IVERILOG
+        //     $vcdplusoff;
+        //     $vcdplusmemoff;
+        // `endif
         $finish();
     end
 

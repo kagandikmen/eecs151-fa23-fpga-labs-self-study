@@ -1,5 +1,5 @@
 // Author:      Kagan Dikmen
-// Modified:    2024-01-10
+// Modified:    2024-01-12
 // Status:      works fine (all the basic tests passed, assertions work too)
 
 module fifo #(
@@ -73,7 +73,7 @@ module fifo #(
     
 
         // full signal
-        if (wr_en && !full && (write_pointer + 1) % 8 == read_pointer)
+        if (wr_en && !rd_en && !full && (write_pointer + 1) % 8 == read_pointer)
         begin
             // $display("Mugla at time: %t ns with wr_en: %b, full value: %b, write_pointer: %d, read_pointer: %d.", $realtime/1000, wr_en, full, write_pointer, read_pointer);
             full_buffer = 1'b1;
@@ -90,7 +90,7 @@ module fifo #(
 
 
         // empty signal
-        if (rd_en && !empty && (read_pointer + 1) % 8 == write_pointer)
+        if (rd_en && !wr_en && !empty && (read_pointer + 1) % 8 == write_pointer)
         begin
             empty_buffer = 1'b1;
         end

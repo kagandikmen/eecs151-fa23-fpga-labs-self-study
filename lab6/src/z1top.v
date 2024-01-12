@@ -1,3 +1,9 @@
+`include "../src/button_parser.v"
+`include "../src/synchronizer.v"
+`include "../src/fifo.v"
+`include "../src/uart.v"
+`include "../src/mem_controller.v"
+
 module z1top #(
     parameter CLOCK_FREQ = 125_000_000,
     parameter BAUD_RATE = 115_200,
