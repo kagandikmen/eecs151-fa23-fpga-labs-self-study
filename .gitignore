@@ -1,0 +1,7 @@
+# Exclude the following path(s) from git
+*.DS_Store
+*/*/build
+*/*/*.log
+*/*/*.json
+# End of .gitignore
+
